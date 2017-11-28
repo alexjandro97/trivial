@@ -1,0 +1,73 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+}
+
+body {
+	background: url(../img/bb.jpg) no-repeat center center fixed;
+	background-size: cover;
+}
+
+.form {
+	background: #BDBDBD;
+	border-radius: 3px;
+	padding: 10px;
+	opacity: .9;
+}
+
+.titulo {
+	background: rgba(0,0,0,.6);
+	padding: 15px;
+	color: #fff;
+	margin-bottom: 15px;
+}
+
+
+input[type="text"],
+input[type="password"]{
+	background: none;
+	border: none;
+	border-bottom: 1px solid #f2f2f2;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+	background: none;
+	border: none;
+	border-bottom: 1px solid blue;
+}
+
+.miniboton {
+	cursor: pointer;
+}
+
+
+
+.miniboton:focus {
+	cursor: no-drop;
+}
+
+.play {
+	cursor: pointer;
+}
+
+.themes {
+	cursor: pointer;
+}
+
+#nivel {
+	display: none;
+}
+
+#preguntas {
+	display: none;
+}
+
+.nivel {
+	margin-bottom: 15px;
+}
+
