@@ -1,6 +1,6 @@
 <?php 
 
-$sql = "SELECT * FROM preguntas";
+$sql = "SELECT * FROM `preguntas`";
 	
 function connectDB(){
 
@@ -11,28 +11,12 @@ function connectDB(){
 
     $conexion = mysqli_connect(DB_HOST, DB_USER, DB_PASS,DB_DATABASE);
 
-        if($conexion){
-            echo 'La conexion de la base de datos se ha hecho satisfactoriamente
-' . "<br><br><br>";
-        }else{
-            echo 'Ha sucedido un error inexperado en la conexion de la base de datos
-' . "<br><br><br>";
-        }
-
     return $conexion;
 }
 
 function disconnectDB($conexion){
 
     $close = mysqli_close($conexion);
-
-        if($close){
-            echo 'La desconexion de la base de datos se ha hecho satisfactoriamente
-' . "<br><br><br>";
-        }else{
-            echo 'Ha sucedido un error inexperado en la desconexion de la base de datos
-' . "<br><br><br>";
-        }   
 
     return $close;
 }
@@ -66,5 +50,9 @@ function getArraySQL($sql){
 }
 
         $myArray = getArraySQL($sql);
-        echo "<br><br>" . json_encode($myArray);
+        //print_r($myArray);
+        $min = 1;
+		$max = count($myArray);
+
+		$random = rand($min,$max);
  ?>

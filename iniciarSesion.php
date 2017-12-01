@@ -31,8 +31,6 @@
             while($objeto = mysqli_fetch_object($resultado)){
                 if ($objeto->user == $user && $objeto->password == $pass) {
                     header("Location: contenido.php?usuario=$user");
-                } else {
-                    echo "Almu";//header('Location: index.php');
                 }
                 echo "por aqui1";
             }
