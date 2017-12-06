@@ -46,7 +46,7 @@
             </div>
             <div class="row">
                 <div class="col"></div>
-                <div class="col-sm-6 botones" id="botones">
+                <div class="col-sm-6 botones">
                     <div class="row" id="eleccion">
                         <div class="col"></div>
                         <div class="btn-group-vertical col-xs-12 col-md-12 col-xs-10">
@@ -56,35 +56,35 @@
                                     <p>
                                     La ciencia que estudia las finanzas, ¿las dominas, seras un empresario de futuro y de exito? Compruebalo en este cuestionario.
                                     </p>
-                                    <button class="play btn btn-danger">Jugar</button>
+                                    <button class="play btn btn-danger" id="economia">Jugar</button>
                                   </div>
                                   <button class="btn btn-lg btn-primary btn-block" value="historia">Historia</button>
                                   <div>
                                     <p>
                                     Es la disciplina que estudia y expone, los acontecimientos transcuridos en el pasado, ¿crees que podras con esto? demuestralo!
                                     </p>
-                                    <button class="play btn btn-primary">Jugar</button>
+                                    <button class="play btn btn-primary" id="historia">Jugar</button>
                                   </div>
                                   <button class="btn btn-lg btn-success btn-block" value="filosofia">Filosofía</button>
                                   <div>
                                     <p>
                                     ¿Sabes de filosofía? Conjunto de reflexiones sobre la esencia de la vida y los efectos de las cosas naturales.
                                     </p>
-                                    <button class="play btn btn-success">Jugar</button>
+                                    <button class="play btn btn-success" id="filosofia">Jugar</button>
                                   </div>
                                   <button class="btn btn-lg btn-warning btn-block" value="lengua">Lengua</button>
                                   <div>
                                     <p>
                                         Preguntas sobre nuestra lengua materna, el Español, demuestra que sabes de nuestra lengua, autores etc.
                                     </p>
-                                    <button class="play btn btn-warning">Jugar</button>
+                                    <button class="play btn btn-warning" id="lengua">Jugar</button>
                                   </div>
                                   <button class="btn btn-lg btn-ligth btn-block" value="ingles">Ingles</button>
                                   <div>
                                     <p>
                                     Preguntas sobre la lengua extranjera más estudiada en el mundo, demuestra que dominas el idioma con las siguentes preguntas.
                                     </p>
-                                    <button class="play btn btn-light">Jugar</button>
+                                    <button class="play btn btn-light" id="ingles">Jugar</button>
                                   </div>
                                 </div>
                         </div>
@@ -127,12 +127,7 @@
                                 <div class="row">
                                     <div class="col"></div>
                                     <div class="col-xs-10">
-                                        <div class="btn-group-vertical">
-                                            <button class="separacion btn btn-block btn-dark disabled" id="separacionTop">pregunta</button>
-                                            <button class="separacion respuestas btn btn-block btn-info" value="<?php echo $myArray[$random][4]; ?>">res</button>
-                                            <button class="separacion respuestas btn btn-block btn-info" value="<?php echo $myArray[$random][5]; ?>">res</button>
-                                            <button class="separacion respuestas btn btn-block btn-info" value="<?php echo $myArray[$random][6]; ?>">res</button>
-                                            <button class="separacion respuestas btn btn-block btn-info" value="<?php echo $myArray[$random][7]; ?>">res</button>
+                                        <div class="btn-group-vertical" id="botones">
                                             <div class="separacion btn btn-block solucion"></div>
                                         </div>
                                     </div>
@@ -148,6 +143,124 @@
         </div>
     
         <!-- DE AQUI EN ADELANTE TENEMOS EL CODIGO DE JAVASCRIPT PARA DARLE FUNCIONALIDAD A LA PAGINA -->
+        
+        <script>
+            iniciaPartida();
+
+            function iniciaPartida() {
+                cambiaLosBotones();
+                
+                $('.respuestas').click( function(){
+                        compruebaRespuesta();
+                }); 
+                
+                
+               /* NO FUNCIONA TODAVIA
+
+                function compruebaRespuesta() {
+                    var respuestaCorrecta;
+
+                    if ($('#economia').click(function(){
+                        respuestaCorrecta = preguntasEconomia[randomEco][5];
+                        respuestaComprobar = $('.respuestas').val();
+                        console.log(respuestaCorrecta);
+                        console.log(respuestaComprobar);
+                    }));
+                
+                    if ($('#historia').click(function(){
+                        respuestaCorrecta = preguntasHistoria[randomHis][5];
+                        respuestaComprobar = $('.respuestas').val();
+                        console.log(respuestaCorrecta);
+                        console.log(respuestaComprobar);
+                    }));    
+                    
+                    if ($('#filosofia').click(function(){
+                        respuestaCorrecta = preguntasFilosofia[randomFilo][5];
+                        respuestaComprobar = $('.respuestas').val();
+                        console.log(respuestaCorrecta);
+                        console.log(respuestaComprobar);
+                    })); 
+                    
+                    if ($('#lengua').click(function(){
+                        respuestaCorrecta = preguntasLengua[randomLen][5];
+                        respuestaComprobar = $('.respuestas').val();
+                        console.log(respuestaCorrecta);
+                        console.log(respuestaComprobar);
+                    }));
+                    
+                    if ($('#ingles').click(function(){
+                        respuestaCorrecta = preguntasIngles[randomIng][5];
+                        respuestaComprobar = $('.respuestas').val();
+                        console.log(respuestaCorrecta);
+                        console.log(respuestaComprobar);
+                    }));
+                }*/
+
+
+
+
+            }
+
+
+
+
+        function cambiaLosBotones() {
+
+            randomEco = Math.floor(Math.random() * preguntasEconomia.length);
+            randomHis = Math.floor(Math.random() * preguntasHistoria.length);
+            randomFilo = Math.floor(Math.random() * preguntasFilosofia.length);
+            randomLen = Math.floor(Math.random() * preguntasLengua.length);
+            randomIng = Math.floor(Math.random() * preguntasIngles.length);
+
+            if ($('#economia').click(function(){
+                $('#botones').empty();
+                $('#botones').append('<button class="separacion btn btn-block btn-dark disabled" id="separacionTop">'+preguntasEconomia[randomEco][0]+' </button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][1] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][2] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][3] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][4] +'</button>');
+            }));
+        
+            if ($('#historia').click(function(){
+                $('#botones').empty();
+                $('#botones').append('<button class="separacion btn btn-block btn-dark disabled" id="separacionTop">'+preguntasHistoria[randomHis][0]+' </button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][1] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][2] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][3] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][4] +'</button>');
+            }));    
+            
+            if ($('#filosofia').click(function(){
+                $('#botones').empty();
+                $('#botones').append('<button class="separacion btn btn-block btn-dark disabled" id="separacionTop">'+preguntasFilosofia[randomFilo][0]+' </button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][1] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][2] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][3] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][4] +'</button>');
+            })); 
+            
+            if ($('#lengua').click(function(){
+                $('#botones').empty();
+                $('#botones').append('<button class="separacion btn btn-block btn-dark disabled" id="separacionTop">'+preguntasLengua[randomLen][0]+' </button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][1] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][2] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][3] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][4] +'</button>');
+            }));
+            
+            if ($('#ingles').click(function(){
+                $('#botones').empty();
+                $('#botones').append('<button class="separacion btn btn-block btn-dark disabled" id="separacionTop">'+preguntasIngles[randomIng][0]+' </button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][1] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][2] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][3] +'</button>');
+                $('#botones').append('<button class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][4] +'</button>');
+            }));
+            
+            
+        }
+        </script>
+
 
         <script>
             for(var i = 1; i<11; i++){
@@ -182,7 +295,7 @@
             });
         </script>
         
-        <script>
+        <!--<script>
             var siguiente;
             var numeroCaja; 
             var puntos = 2; 
@@ -247,6 +360,6 @@
                     }
                 }
             }
-        </script>
+        </script>-->
     </body>
 </html>
