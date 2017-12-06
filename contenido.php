@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="css/jquery-ui.min.css">
         <link href="js/jquery.raty.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/estilos.css">
+        <script src="js/preguntas.js"></script>
         <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.min.js"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
@@ -18,6 +19,9 @@
           $( function() {
             $( "#accordion" ).accordion();
           } );
+        </script>
+        <script>
+            //meter el random para las preguntas
         </script>
         <style>
             .separacion {
@@ -32,7 +36,6 @@
                 margin-bottom: 5px;
             }
         </style>
-        <?php require('pruebaJSON.php'); ?>
     </head>
     <body>
         <div class="container">
@@ -125,11 +128,11 @@
                                     <div class="col"></div>
                                     <div class="col-xs-10">
                                         <div class="btn-group-vertical">
-                                            <button class="separacion btn btn-block btn-dark disabled" id="separacionTop"><?php echo $myArray[$random][3]; ?></button>
-                                            <button class="separacion respuestas btn btn-block btn-info" value="<?php echo $myArray[$random][4]; ?>"><?php echo $myArray[$random][4]; ?></button>
-                                            <button class="separacion respuestas btn btn-block btn-info" value="<?php echo $myArray[$random][5]; ?>"><?php echo $myArray[$random][5]; ?></button>
-                                            <button class="separacion respuestas btn btn-block btn-info" value="<?php echo $myArray[$random][6]; ?>"><?php echo $myArray[$random][6]; ?></button>
-                                            <button class="separacion respuestas btn btn-block btn-info" value="<?php echo $myArray[$random][7]; ?>"><?php echo $myArray[$random][7]; ?></button>
+                                            <button class="separacion btn btn-block btn-dark disabled" id="separacionTop">pregunta</button>
+                                            <button class="separacion respuestas btn btn-block btn-info" value="<?php echo $myArray[$random][4]; ?>">res</button>
+                                            <button class="separacion respuestas btn btn-block btn-info" value="<?php echo $myArray[$random][5]; ?>">res</button>
+                                            <button class="separacion respuestas btn btn-block btn-info" value="<?php echo $myArray[$random][6]; ?>">res</button>
+                                            <button class="separacion respuestas btn btn-block btn-info" value="<?php echo $myArray[$random][7]; ?>">res</button>
                                             <div class="separacion btn btn-block solucion"></div>
                                         </div>
                                     </div>
