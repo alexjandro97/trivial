@@ -131,7 +131,7 @@
                             <!--<div class="col-xs-12">
                                 <div class="row">-->
                                     <div class="col"></div>
-                                    <div class="col-xs-10">
+                                    <div class="col-xs-6">
                                         <div class="btn-group-vertical" id="botones">
                                             <div class="separacion btn btn-block solucion"></div>
                                             <br>
@@ -152,8 +152,8 @@
         
         <script>
             var vidas = 3;
-            var contadorWin = 5;
-
+            var contadorWin = 0;
+            var timerId;
 
 
             iniciaPartida();
@@ -163,8 +163,7 @@
                 aparecenTrofeos();
             }
 
-
-
+             
 
         function cambiaLosBotones() {
 
@@ -174,85 +173,79 @@
             randomLen = Math.floor(Math.random() * preguntasLengua.length);
             randomIng = Math.floor(Math.random() * preguntasIngles.length);
 
+
             if ($('#economia').click(function(){
+                $('#botones').fadeIn('slow');
                 $('#botones').empty();
                 $('#botones').append('<button class="separacion btn btn-block btn-dark disabled pregunta" id="separacionTop">'+preguntasEconomia[randomEco][0]+' </button>');
-                $('#botones').append('<button id="boton1" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][1] +'</button>');
-                $('#botones').append('<button id="boton2" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][2] +'</button>');
-                $('#botones').append('<button id="boton3" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][3] +'</button>');
-                $('#botones').append('<button id="boton4" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][4] +'</button>');
+                $('#botones').append('<button id="boton1" onclick="compruebaEco(1);" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][1] +'</button>');
+                $('#botones').append('<button id="boton2" onclick="compruebaEco(2);" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][2] +'</button>');
+                $('#botones').append('<button id="boton3" onclick="compruebaEco(3);" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][3] +'</button>');
+                $('#botones').append('<button id="boton4" onclick="compruebaEco(4);" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][4] +'</button>');
             }));
         
             if ($('#historia').click(function(){
+                $('#botones').fadeIn('slow');
                 $('#botones').empty();
                 $('#botones').append('<button class="separacion btn btn-block btn-dark disabled pregunta" id="separacionTop">'+preguntasHistoria[randomHis][0]+' </button>');
-                $('#botones').append('<button id="boton1" class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][1] +'</button>');
-                $('#botones').append('<button id="boton2" class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][2] +'</button>');
-                $('#botones').append('<button id="boton3" class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][3] +'</button>');
-                $('#botones').append('<button id="boton4" class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][4] +'</button>');
+                $('#botones').append('<button id="boton1" onclick="compruebaHisFilo(1);" class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][1] +'</button>');
+                $('#botones').append('<button id="boton2" onclick="compruebaHisFilo(2);" class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][2] +'</button>');
+                $('#botones').append('<button id="boton3" onclick="compruebaHisFilo(3);" class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][3] +'</button>');
+                $('#botones').append('<button id="boton4" onclick="compruebaHisFilo(4);" class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][4] +'</button>');
             }));    
             
             if ($('#filosofia').click(function(){
+                $('#botones').fadeIn('slow');
                 $('#botones').empty();
                 $('#botones').append('<button class="separacion btn btn-block btn-dark disabled pregunta" id="separacionTop">'+preguntasFilosofia[randomFilo][0]+' </button>');
-                $('#botones').append('<button id="boton1" class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][1] +'</button>');
-                $('#botones').append('<button id="boton2" class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][2] +'</button>');
-                $('#botones').append('<button id="boton3" class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][3] +'</button>');
-                $('#botones').append('<button id="boton4" class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][4] +'</button>');
+                $('#botones').append('<button id="boton1" onclick="compruebaFilo(1);" class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][1] +'</button>');
+                $('#botones').append('<button id="boton2" onclick="compruebaFilo(2);" class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][2] +'</button>');
+                $('#botones').append('<button id="boton3" onclick="compruebaFilo(3);" class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][3] +'</button>');
+                $('#botones').append('<button id="boton4" onclick="compruebaFilo(4);" class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][4] +'</button>');
             })); 
             
             if ($('#lengua').click(function(){
+                $('#botones').fadeIn('slow');
                 $('#botones').empty();
                 $('#botones').append('<button class="separacion btn btn-block btn-dark disabled pregunta" id="separacionTop">'+preguntasLengua[randomLen][0]+' </button>');
-                $('#botones').append('<button id="boton1" class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][1] +'</button>');
-                $('#botones').append('<button id="boton2" class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][2] +'</button>');
-                $('#botones').append('<button id="boton3" class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][3] +'</button>');
-                $('#botones').append('<button id="boton4" class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][4] +'</button>');
+                $('#botones').append('<button id="boton1" onclick="compruebaLen(1);" class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][1] +'</button>');
+                $('#botones').append('<button id="boton2" onclick="compruebaLen(2);" class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][2] +'</button>');
+                $('#botones').append('<button id="boton3" onclick="compruebaLen(3);" class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][3] +'</button>');
+                $('#botones').append('<button id="boton4" onclick="compruebaLen(4);" class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][4] +'</button>');
             }));
             
             if ($('#ingles').click(function(){
+                $('#botones').fadeIn('slow');
                 $('#botones').empty();
                 $('#botones').append('<button class="separacion btn btn-block btn-dark disabled pregunta" id="separacionTop">'+preguntasIngles[randomIng][0]+' </button>');
-                $('#botones').append('<button id="boton1" class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][1] +'</button>');
-                $('#botones').append('<button id="boton2" class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][2] +'</button>');
-                $('#botones').append('<button id="boton3" class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][3] +'</button>');
-                $('#botones').append('<button id="boton4" class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][4] +'</button>');
+                $('#botones').append('<button id="boton1" onclick="compruebaIng(1);" class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][1] +'</button>');
+                $('#botones').append('<button id="boton2" onclick="compruebaIng(2);" class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][2] +'</button>');
+                $('#botones').append('<button id="boton3" onclick="compruebaIng(3);" class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][3] +'</button>');
+                $('#botones').append('<button id="boton4" onclick="compruebaIng(4);" class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][4] +'</button>');
             }));
-
-                $('#boton1').click( function(){
-                    console.log("Pulsado 1 ")
-                    comprueba(1);
-                });
-                
-                $('#boton2').click( function(){
-                    console.log("Pulsado 2 ")
-                    comprueba(2);
-                });
-                $('#boton3').click( function(){
-                    console.log("Pulsado 3")
-                    comprueba(3);
-                });
-                $('#boton4').click( function(){
-                    console.log("Pulsado 4")
-                    comprueba(4);
-                });
-
-                function comprueba(pulsado){
-               
-                    if(pulsado === preguntasEconomia[randomEco][5]){
-                       //contador=contador+10;
-                       $('.pregunta').html('Correcto');
-                    }else{
-                        //vidas=vidas-1;
-                        $('.pregunta').html('Incorrecto');
-                        iniciaPartida();
-                    }
-                }
             
         }
 
+        function compruebaEco(pulsado){
+                console.log(pulsado);
+                    if(pulsado === preguntasEconomia[randomEco][5]){
+                       $('.pregunta').html('Correcto');
+                       $('.respuestas').addClass("disabled");
+                       clearInterval(timerId);
+                       contadorWin++;
+                       $('#botones').append('<button id="boton1" onclick="cambiaLosBotones();" class="separacion btn btn-block btn-outline-dark">Siguiente</button>')
+                    }else{
+                        $('.pregunta').html('Incorrecto');
+                        $('.respuestas').addClass("disabled");
+                        clearInterval(timerId);
+                        $('#botones').replaceWith('<div class="reiniciar"><button class="btn btn-block btn-outline-dark">Perdiste, Siguiente</button></div>');
+                        vidas--;
+                    }
+                
+            }
+
         function activarContador() {
-                var timerId = 20;
+                timerId = 20;
                 var ctr=10;
                 var sum=0;
                 var max=10;
@@ -278,7 +271,7 @@
                   $('.masTiempo').text("Se te acabó el tiempo");
                   $('.masTiempo').addClass('bg-danger');
                   $('.respuestas').prop('disabled', true);
-                  $('#botones').replaceWith('<div class="reiniciar"><a href="contenido.php" class="btn btn-block btn-outline-dark">Perdiste, Salir</a></div>');
+                  $('#botones').replaceWith('<div class="reiniciar"><button class="btn btn-block btn-outline-dark">Perdiste, Siguiente</button></div>');
                   vidas--;
                 }    
               }, 2000);
@@ -290,7 +283,8 @@
             $('#vidas').raty({
                 score       : vidas,
                 readOnly    : true,
-                hints       : ['Estas casi Muerto', 'Te libras', 'Vivito y Coleando'],
+                hints       : ["","",""],
+                noRatedMsg  : "Vidas",
                 start       : vidas,
                 number      : 3,
                 startOn     : "images/heart.png",
@@ -301,7 +295,9 @@
             function aparecenTrofeos() {
                 $('#trofeos').raty({
                 readOnly    : true,
+                hints       : ["","",""],
                 score       : contadorWin,
+                noRatedMsg  : "Puntos",
                 halfShow    : false,
                 number      : 10,
                 startType   : 'i'
@@ -332,7 +328,7 @@
 
         <script>
             for(var i = 1; i<11; i++){
-                $('#niveles').append('<div class="miniboton btn-group" > <button class="miniboton btn-lg btn-info" onclick="activarContador();">'+i*10+'<i class="fa fa-times" aria-hidden="true"></i> </button> </div>');
+                $('#niveles').append('<div class="miniboton btn-group" > <button class="miniboton btn-lg btn-info" onclick="activarContador();">'+i*10+'</button></div>');
             }
         </script>
 
