@@ -6,6 +6,7 @@
         <title>Trivial - Juego</title>
         <link rel="stylesheet" href="css/font-awesome.min.css">
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
         <link rel="stylesheet" href="css/jquery-ui.min.css">
         <link href="js/jquery.raty.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="css/estilos.css">
@@ -55,35 +56,35 @@
                                     <p>
                                     La ciencia que estudia las finanzas, ¿las dominas, seras un empresario de futuro y de exito? Compruebalo en este cuestionario.
                                     </p>
-                                    <button class="play btn btn-danger" id="economia">Jugar</button>
+                                    <button class="play btn btn-danger economia" id="economia">Jugar</button>
                                   </div>
                                   <button class="btn btn-lg btn-primary btn-block" value="historia">Historia</button>
                                   <div>
                                     <p>
                                     Es la disciplina que estudia y expone, los acontecimientos transcuridos en el pasado, ¿crees que podras con esto? demuestralo!
                                     </p>
-                                    <button class="play btn btn-primary" id="historia">Jugar</button>
+                                    <button class="play btn btn-primary historia" id="historia">Jugar</button>
                                   </div>
                                   <button class="btn btn-lg btn-success btn-block" value="filosofia">Filosofía</button>
                                   <div>
                                     <p>
                                     ¿Sabes de filosofía? Conjunto de reflexiones sobre la esencia de la vida y los efectos de las cosas naturales.
                                     </p>
-                                    <button class="play btn btn-success" id="filosofia">Jugar</button>
+                                    <button class="play btn btn-success filosofia" id="filosofia">Jugar</button>
                                   </div>
                                   <button class="btn btn-lg btn-warning btn-block" value="lengua">Lengua</button>
                                   <div>
                                     <p>
                                         Preguntas sobre nuestra lengua materna, el Español, demuestra que sabes de nuestra lengua, autores etc.
                                     </p>
-                                    <button class="play btn btn-warning" id="lengua">Jugar</button>
+                                    <button class="play btn btn-warning lengua" id="lengua">Jugar</button>
                                   </div>
                                   <button class="btn btn-lg btn-ligth btn-block" value="ingles">Ingles</button>
                                   <div>
                                     <p>
                                     Preguntas sobre la lengua extranjera más estudiada en el mundo, demuestra que dominas el idioma con las siguentes preguntas.
                                     </p>
-                                    <button class="play btn btn-light" id="ingles">Jugar</button>
+                                    <button class="play btn btn-light ingles" id="ingles">Jugar</button>
                                   </div>
                                 </div>
                         </div>
@@ -142,7 +143,7 @@
                             </div>
                             <div class="col"></div>
                         </div>-->
-                    </div>
+                    </div> 
                 </div>
             </div>
             <a class="btn btn-dark btn-block" href="cerrarSesion.php">Cerrar Sesión</a>
@@ -155,15 +156,34 @@
             var contadorWin = 0;
             var timerId;
 
+            cambiaLosBotones();
+            
 
-            iniciaPartida();
-
-            function iniciaPartida() {
+            function continuaJuego() {
                 cambiaLosBotones();
-                aparecenTrofeos();
+                if (vidas === 0) {
+                    $('.progress').replaceWith('<h4 class="text-center" style="font-size: 40px; font-family: Dancing Script, cursive;">La edad del hombre termina. El tiempo del orco ha llegado.</h4>');
+                    $('#botones').replaceWith('<img class="gif" src="img/boromir.gif" alt="Perdiste"><a href="contenido.php" class="btn btn-block btn-outline-dark">Reiniciar</a>');
+                }
+                $('#vidas').raty({
+                    score       : vidas,
+                    readOnly    : true,
+                    hints       : ["","",""],
+                    noRatedMsg  : "Vidas",
+                    start       : vidas,
+                    number      : 3,
+                    startOn     : "images/heart.png",
+                    startOff    : "images/heartBreak.png"
+                });
+                $('#trofeos').raty({
+                    readOnly    : true,
+                    hints       : ["","",""],
+                    score       : contadorWin,
+                    noRatedMsg  : "Puntos",
+                    halfShow    : false,
+                    number      : 10
+                });
             }
-
-             
 
         function cambiaLosBotones() {
 
@@ -174,75 +194,162 @@
             randomIng = Math.floor(Math.random() * preguntasIngles.length);
 
 
-            if ($('#economia').click(function(){
+            if ($('.economia').click(function(){
                 $('#botones').fadeIn('slow');
                 $('#botones').empty();
                 $('#botones').append('<button class="separacion btn btn-block btn-dark disabled pregunta" id="separacionTop">'+preguntasEconomia[randomEco][0]+' </button>');
-                $('#botones').append('<button id="boton1" onclick="compruebaEco(1);" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][1] +'</button>');
-                $('#botones').append('<button id="boton2" onclick="compruebaEco(2);" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][2] +'</button>');
-                $('#botones').append('<button id="boton3" onclick="compruebaEco(3);" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][3] +'</button>');
-                $('#botones').append('<button id="boton4" onclick="compruebaEco(4);" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][4] +'</button>');
+                $('#botones').append('<button onclick="compruebaEco(1);" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][1] +'</button>');
+                $('#botones').append('<button onclick="compruebaEco(2);" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][2] +'</button>');
+                $('#botones').append('<button onclick="compruebaEco(3);" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][3] +'</button>');
+                $('#botones').append('<button onclick="compruebaEco(4);" class="separacion respuestas btn btn-block btn-info">'+ preguntasEconomia[randomEco][4] +'</button>');
             }));
         
-            if ($('#historia').click(function(){
+            if ($('.historia').click(function(){
                 $('#botones').fadeIn('slow');
                 $('#botones').empty();
                 $('#botones').append('<button class="separacion btn btn-block btn-dark disabled pregunta" id="separacionTop">'+preguntasHistoria[randomHis][0]+' </button>');
-                $('#botones').append('<button id="boton1" onclick="compruebaHisFilo(1);" class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][1] +'</button>');
-                $('#botones').append('<button id="boton2" onclick="compruebaHisFilo(2);" class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][2] +'</button>');
-                $('#botones').append('<button id="boton3" onclick="compruebaHisFilo(3);" class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][3] +'</button>');
-                $('#botones').append('<button id="boton4" onclick="compruebaHisFilo(4);" class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][4] +'</button>');
+                $('#botones').append('<button onclick="compruebaHis(1);" class="separacion respuestas btn btn-block btn-info">'+preguntasHistoria[randomHis][1]+'</button>');
+                $('#botones').append('<button onclick="compruebaHis(2);" class="separacion respuestas btn btn-block btn-info">'+preguntasHistoria[randomHis][2]+'</button>');
+                $('#botones').append('<button onclick="compruebaHis(3);" class="separacion respuestas btn btn-block btn-info">'+ preguntasHistoria[randomHis][3]+'</button>');
+                $('#botones').append('<button onclick="compruebaHis(4);" class="separacion respuestas btn btn-block btn-info">'+preguntasHistoria[randomHis][4]+'</button>');
             }));    
             
-            if ($('#filosofia').click(function(){
+            if ($('.filosofia').click(function(){
                 $('#botones').fadeIn('slow');
                 $('#botones').empty();
                 $('#botones').append('<button class="separacion btn btn-block btn-dark disabled pregunta" id="separacionTop">'+preguntasFilosofia[randomFilo][0]+' </button>');
-                $('#botones').append('<button id="boton1" onclick="compruebaFilo(1);" class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][1] +'</button>');
-                $('#botones').append('<button id="boton2" onclick="compruebaFilo(2);" class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][2] +'</button>');
-                $('#botones').append('<button id="boton3" onclick="compruebaFilo(3);" class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][3] +'</button>');
-                $('#botones').append('<button id="boton4" onclick="compruebaFilo(4);" class="separacion respuestas btn btn-block btn-info">'+ preguntasFilosofia[randomFilo][4] +'</button>');
+                $('#botones').append('<button onclick="compruebaFilo(1);" class="separacion respuestas btn btn-block btn-info">'+preguntasFilosofia[randomFilo][1]+'</button>');
+                $('#botones').append('<button onclick="compruebaFilo(2);" class="separacion respuestas btn btn-block btn-info">'+preguntasFilosofia[randomFilo][2]+'</button>');
+                $('#botones').append('<button onclick="compruebaFilo(3);" class="separacion respuestas btn btn-block btn-info">'+preguntasFilosofia[randomFilo][3]+'</button>');
+                $('#botones').append('<button onclick="compruebaFilo(4);" class="separacion respuestas btn btn-block btn-info">'+preguntasFilosofia[randomFilo][4]+'</button>');
             })); 
             
-            if ($('#lengua').click(function(){
+            if ($('.lengua').click(function(){
                 $('#botones').fadeIn('slow');
                 $('#botones').empty();
                 $('#botones').append('<button class="separacion btn btn-block btn-dark disabled pregunta" id="separacionTop">'+preguntasLengua[randomLen][0]+' </button>');
-                $('#botones').append('<button id="boton1" onclick="compruebaLen(1);" class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][1] +'</button>');
-                $('#botones').append('<button id="boton2" onclick="compruebaLen(2);" class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][2] +'</button>');
-                $('#botones').append('<button id="boton3" onclick="compruebaLen(3);" class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][3] +'</button>');
-                $('#botones').append('<button id="boton4" onclick="compruebaLen(4);" class="separacion respuestas btn btn-block btn-info">'+ preguntasLengua[randomLen][4] +'</button>');
+                $('#botones').append('<button onclick="compruebaLen(1);" class="separacion respuestas btn btn-block btn-info">'+preguntasLengua[randomLen][1]+'</button>');
+                $('#botones').append('<button onclick="compruebaLen(2);" class="separacion respuestas btn btn-block btn-info">'+preguntasLengua[randomLen][2]+'</button>');
+                $('#botones').append('<button onclick="compruebaLen(3);" class="separacion respuestas btn btn-block btn-info">'+preguntasLengua[randomLen][3]+'</button>');
+                $('#botones').append('<button onclick="compruebaLen(4);" class="separacion respuestas btn btn-block btn-info">'+preguntasLengua[randomLen][4]+'</button>');
             }));
             
-            if ($('#ingles').click(function(){
+            if ($('.ingles').click(function(){
                 $('#botones').fadeIn('slow');
                 $('#botones').empty();
                 $('#botones').append('<button class="separacion btn btn-block btn-dark disabled pregunta" id="separacionTop">'+preguntasIngles[randomIng][0]+' </button>');
-                $('#botones').append('<button id="boton1" onclick="compruebaIng(1);" class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][1] +'</button>');
-                $('#botones').append('<button id="boton2" onclick="compruebaIng(2);" class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][2] +'</button>');
-                $('#botones').append('<button id="boton3" onclick="compruebaIng(3);" class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][3] +'</button>');
-                $('#botones').append('<button id="boton4" onclick="compruebaIng(4);" class="separacion respuestas btn btn-block btn-info">'+ preguntasIngles[randomIng][4] +'</button>');
+                $('#botones').append('<button onclick="compruebaIng(1);" class="separacion respuestas btn btn-block btn-info">'+preguntasIngles[randomIng][1]+'</button>');
+                $('#botones').append('<button onclick="compruebaIng(2);" class="separacion respuestas btn btn-block btn-info">'+preguntasIngles[randomIng][2]+'</button>');
+                $('#botones').append('<button onclick="compruebaIng(3);" class="separacion respuestas btn btn-block btn-info">'+preguntasIngles[randomIng][3]+'</button>');
+                $('#botones').append('<button onclick="compruebaIng(4);" class="separacion respuestas btn btn-block btn-info">'+preguntasIngles[randomIng][4]+'</button>');
             }));
             
         }
 
         function compruebaEco(pulsado){
-                console.log(pulsado);
-                    if(pulsado === preguntasEconomia[randomEco][5]){
-                       $('.pregunta').html('Correcto');
-                       $('.respuestas').addClass("disabled");
-                       clearInterval(timerId);
-                       contadorWin++;
-                       $('#botones').append('<button id="boton1" onclick="cambiaLosBotones();" class="separacion btn btn-block btn-outline-dark">Siguiente</button>')
-                    }else{
-                        $('.pregunta').html('Incorrecto');
-                        $('.respuestas').addClass("disabled");
-                        clearInterval(timerId);
-                        $('#botones').replaceWith('<div class="reiniciar"><button class="btn btn-block btn-outline-dark">Perdiste, Siguiente</button></div>');
-                        vidas--;
-                    }
-                
-            }
+            console.log(pulsado);
+            if(pulsado === preguntasEconomia[randomEco][5]){
+                $('.pregunta').html('Correcto');
+                $('.respuestas').addClass("disabled");
+
+                $('.respuestas').css("cursor", "not-allowed");
+                clearInterval(timerId);
+                contadorWin++;
+                $('#botones').append('<button onclick="continuaJuego();" class="economia separacion btn btn-block btn-outline-dark">Siguiente</button>')
+            }else{
+                $('.pregunta').html('La respuesta era: '+preguntasEconomia[randomEco][preguntasEconomia[randomEco][5]]).addClass("btn-danger");
+                $('.respuestas').addClass("disabled");
+
+                $('.respuestas').css("cursor", "not-allowed");
+                clearInterval(timerId);
+                vidas--;
+                $('#botones').append('<button onclick="continuaJuego();" class="economia btn btn-block btn-outline-dark">Perdiste, Siguiente</button>');
+            }  
+        }
+
+        function compruebaHis(pulsado){
+            console.log(pulsado);
+            if(pulsado === preguntasHistoria[randomHis][5]){
+                $('.pregunta').html('Correcto');
+                $('.respuestas').addClass("disabled");
+
+                $('.respuestas').css("cursor", "not-allowed");
+                clearInterval(timerId);
+                contadorWin++;
+                $('#botones').append('<button onclick="continuaJuego();" class="historia separacion btn btn-block btn-outline-dark">Siguiente</button>')
+            }else{
+                $('.pregunta').html('La respuesta era: '+preguntasHistoria[randomHis][preguntasHistoria[randomHis][5]]);
+                $('.respuestas').addClass("disabled");
+                $('.respuestas').css("cursor", "not-allowed");
+                clearInterval(timerId);
+                $('#botones').append('<button onclick="continuaJuego();" class="historia btn btn-block btn-outline-dark">Perdiste, Siguiente</button>');
+                vidas--;
+            }  
+        }
+
+        function compruebaFilo(pulsado){
+            console.log(pulsado);
+            if(pulsado === preguntasFilosofia[randomFilo][5]){
+                $('.pregunta').html('Correcto');
+                $('.respuestas').addClass("disabled");
+
+                $('.respuestas').css("cursor", "not-allowed");
+                clearInterval(timerId);
+                contadorWin++;
+                $('#botones').append('<button onclick="continuaJuego();" class="filosofia separacion btn btn-block btn-outline-dark">Siguiente</button>')
+            }else{
+                $('.pregunta').html('La respuesta era: '+preguntasFilosofia[randomFilo][preguntasFilosofia[randomFilo][5]]);
+                $('.respuestas').addClass("disabled");
+
+                $('.respuestas').css("cursor", "not-allowed");
+                clearInterval(timerId);
+                $('#botones').append('<button onclick="continuaJuego();" class="filosofia btn btn-block btn-outline-dark">Perdiste, Siguiente</button>');
+                vidas--;
+            }  
+        }
+
+        function compruebaLen(pulsado){
+            console.log(pulsado);
+            if(pulsado === preguntasLengua[randomLen][5]){
+                $('.pregunta').html('Correcto');
+                $('.respuestas').addClass("disabled");
+
+                $('.respuestas').css("cursor", "not-allowed");
+                clearInterval(timerId);
+                contadorWin++;
+                $('#botones').append('<button onclick="continuaJuego();" class="lengua separacion btn btn-block btn-outline-dark">Siguiente</button>')
+            }else{
+                $('.pregunta').html('La respuesta era: '+preguntasLengua[randomLen][preguntasLengua[randomLen][5]]);
+                $('.respuestas').addClass("disabled");
+
+                $('.respuestas').css("cursor", "not-allowed");
+                clearInterval(timerId);
+                $('#botones').append('<button onclick="continuaJuego();" class="lengua btn btn-block btn-outline-dark">Perdiste, Siguiente</button>');
+                vidas--;
+            }  
+        }
+
+        function compruebaIng(pulsado){
+            console.log(pulsado);
+            if(pulsado === preguntasIngles[randomIng][5]){
+                $('.pregunta').html('Correcto');
+                $('.respuestas').addClass("disabled");
+
+                $('.respuestas').css("cursor", "not-allowed");
+                clearInterval(timerId);
+                contadorWin++;
+                $('#botones').append('<button onclick="continuaJuego();" class="ingles separacion btn btn-block btn-outline-dark">Siguiente</button>')
+            }else{
+                $('.pregunta').html('La respuesta era la '+preguntasIngles[randomIng][preguntasIngles[randomIng][5]]);
+                $('.respuestas').addClass("disabled");
+
+                $('.respuestas').css("cursor", "not-allowed");
+                clearInterval(timerId);
+                $('#botones').append('<button onclick="continuaJuego();" class="ingles btn btn-block btn-outline-dark">Perdiste, Siguiente</button>');
+                vidas--;
+            }  
+        }
+
 
         function activarContador() {
                 timerId = 20;
@@ -277,34 +384,8 @@
               }, 2000);
             }
 
-            //    PROBANDO EL RATY.JS    
-
-
-            $('#vidas').raty({
-                score       : vidas,
-                readOnly    : true,
-                hints       : ["","",""],
-                noRatedMsg  : "Vidas",
-                start       : vidas,
-                number      : 3,
-                startOn     : "images/heart.png",
-                startOff    : "images/heartBreak.png"
-            });
-
-
-            function aparecenTrofeos() {
-                $('#trofeos').raty({
-                readOnly    : true,
-                hints       : ["","",""],
-                score       : contadorWin,
-                noRatedMsg  : "Puntos",
-                halfShow    : false,
-                number      : 10,
-                startType   : 'i'
-            });
-
                 //NO FUNCIONA ESTA PUTA MIERDA!!!
-            $('#trofeos').find('i').removeClass("start-on-png");
+            /*$('#trofeos').find('i').removeClass("start-on-png");
                 switch (contadorWin) {
                     case 1 : $('#trofeos').find('i').addClass("fa fa-smile fa-3x gold");break;
                     case 2 : $('#trofeos').find('i').addClass("fa fa-smile fa-3x gold");break;
@@ -317,10 +398,7 @@
                     case 9 : $('#trofeos').find('i').addClass("fa fa-smile fa-3x gold");break;
                     case 10 : $('#trofeos').find('i').addClass("fa fa-smile fa-3x gold");break;
                 }
-
-            }
-
-
+*/
 
 
         </script>
