@@ -251,7 +251,6 @@
             if(pulsado === preguntasEconomia[randomEco][5]){
                 $('.pregunta').html('Correcto');
                 $('.respuestas').addClass("disabled");
-
                 $('.respuestas').css("cursor", "not-allowed");
                 clearInterval(timerId);
                 contadorWin++;
